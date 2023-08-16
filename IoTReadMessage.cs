@@ -15,9 +15,9 @@ namespace MCT.Function
     public class IoTReadMessage
     {
         private static HttpClient client = new HttpClient();
-        
+
         [FunctionName("IoTReadMessage")]
-        public async void Run([IoTHubTrigger("messages/events", Connection = "IoT_Hub")]EventData message, ILogger log)
+        public async void Run([IoTHubTrigger("messages/events", Connection = "IoT_Hub")] EventData message, ILogger log)
         {
             var ConnectionString = Environment.GetEnvironmentVariable("CosmosDBConnection");
 
@@ -26,7 +26,7 @@ namespace MCT.Function
                 var json = Encoding.UTF8.GetString(message.Body.Array);
                 EventRecord eventMessage = Newtonsoft.Json.JsonConvert.DeserializeObject<EventRecord>(json);
 
-                if(eventMessage.DeviceId = "kasperdecorte")
+                if (eventMessage.DeviceId = "kasperdecorte")
                 {
                     CosmosClientOptions options = new CosmosClientOptions()
                     {
